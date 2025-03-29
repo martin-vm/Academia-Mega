@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Clase HTML5 - CSS - Sesion 5</title>      
+    </head>
+    <style>
+        body{
+            background-color: #f8f9f9f3;
+            text-align: center;
+        }
+        .cuadros{
+            border: 1px solid white;
+            background-color: #2f00ff;
+            color: white;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        h1, h2, h3, div p {
+            background-color: red;
+            padding: 10px;
+        }
+        .cuadros img {
+            position: relative;
+            width: 200px;
+            animation: mover 3s linear infinite alternate;
+        }
+        
+        @keyframes mover {
+            0% {
+                left: -400px;
+            }
+            100% {
+                left: 400px;
+            }
+        }
+
+    </style>
+    <body>
+        <div class="cuadros">
+            <h1>Clase 5: HTML5</h1>
+            <h2>HTML5, CSS y Las Super Chivas</h2>
+            <h3>Reba&ntilde;o Sagrado </h3>  
+        </div>      
+        <br>
+        <div class="cuadros">
+            <a href="https://www.chivasdecorazon.com.mx/es"><img src="logo.png" style="width: 200px;"></a>
+        </div>   
+        <br>
+        <div class="cuadros">
+            <p>Hola desde DIV</p>
+        </div>
+    </body>
+</html>
