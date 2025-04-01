@@ -3,9 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Notas Guardadas</title>
 </head>
 <body>
+    <h1>
+        Notas Guardadas
+    </h1>
+    <textarea id="nota"></textarea>
+    <br>
+    <button onClick="guardarNota();">Guardar Nota</button>
+    <button onClick="borrarNotas();">Borrar Todas</button>
+    <br>
+    <h2>Listas de Notas</h2>
+    <ul id="listaNotas"></ul>
     <script src="clase-6.js"></script>
+    <script>
+        function guardarNota(){
+            const texto = document.getElementById("nota").value.trim();
+            if(texto === "") return;
+            let notas = JSON.parse(localStorage.getItem("notas")) || [];
+                
+            notas.push(texto);
+
+            localStorage.setItem("notas", JSON.stringify(notas));
+            document.getElementById("nota").value = "";
+            mostrarNotas();
+        }
+
+        function mostrarNotas(){
+            const lista = document.getElementById("listaNotas");
+            lista.innerHTML = "";
+            let notas = JSON.parse(localStorage.getItem("notas")) || [];
+
+            notas.forEach((nota, index)=>{
+                const li = document.createElement("li");
+                li.innerHTML = `${nota} <span onClick="borrarNota(${index});">X</span>`;
+                lista.appendChild(li);
+            });
+        }
+
+        function borrarNotas(){
+            localStorage.removeItem("notas");
+            mostrarNotas();
+        }
+
+        function borrarNota(index){
+            let notas = JSON.parse(localStorage.getItem("notas")) || [];
+            notas.splice(index, 1);
+            localStorage.setItem("notas", JSON.stringify(notas));
+            mostrarNotas();
+
+        }
+
+        mostrarNotas();
+    </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const usuario = {
+/*const usuario = {
     nombre: "Ana",
     edad: 30,
     ciudad: "Madrid"
@@ -16,4 +16,4 @@ const datosObjeto = JSON.parse(datosGuardados);
 
 console.log(datosObjeto);
 
-//localStorage.removeItem("usuario");
+//localStorage.removeItem("usuario");*/
