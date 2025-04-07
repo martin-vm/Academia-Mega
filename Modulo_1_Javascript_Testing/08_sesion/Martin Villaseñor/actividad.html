@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeAPI</title>
+    <style>
+        body{
+            background-color: #f3f4f6;
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1{
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #pokemon-container{
+            display: grid;
+            grid-template-columns: repeat(3, minmax(200px, 1fr));
+            gap: 15px;
+            justify-content: center;
+        }
+        .card{
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card img{
+            max-width: 100px;
+            border-radius: 8px;
+        }
+
+        .card h2{
+            font-size: 18px;
+            margin-top: 10px;
+            text-transform: capitalize;
+        }
+
+        .card:hover{
+            box-shadow: 0 4px 6px rgba(158, 158, 158, 0.8);
+        }
+
+        .movimientos {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            background: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .movimientos li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .movimientos li:last-child {
+            border-bottom: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Lista de Pokemon</h1>
+    <div id="pokemon-container"></div>
+
+    <script>
+        async function obtenerPokemones(){
+            const container = document.getElementById("pokemon-container");
+
+            for(let i = 1; i<=20; i++){
+
+                try {
+                    const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+                    console.log(respuesta);
+                    const data = await respuesta.json();
+                    console.log(data.moves);
+
+                    const card = document.createElement("div");
+                    card.className = "card";
+                    card.innerHTML = `
+                        <img src="${data.sprites.front_default}" alt="${data.name}">
+                        <h2>${data.name}</h2>
+                    `;
+
+                    const ul = document.createElement("ul");
+                    ul.className = "movimientos";
+
+                    const movimientos = data.moves.slice(0, 3)
+                        .map(element => `<li>${element.move.name}</li>`)
+                        .join("");
+
+                    ul.innerHTML = movimientos;
+
+
+                    container.appendChild(card);
+                    card.appendChild(ul);
+                } catch (error) {
+                    console.log("Error al obtener el Pokemon", error);
+                }
+            }
+        }
+
+        obtenerPokemones();
+    </script>
+    
+</body>
+</html>
