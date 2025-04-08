@@ -1,35 +1,35 @@
-document.getElementById("testForm").addEventListener("submit", function(e){
+document.getElementById("formularioNotas").addEventListener("submit", function(e){
     e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const edad = document.getElementById("edad").value.trim();
-    const resultado = document.getElementById("resultado");
+    const nota1 = parseFloat(document.getElementById("nota1").value);
+    const nota2 = parseFloat(document.getElementById("nota2").value);
+    const nota3 = parseFloat(document.getElementById("nota3").value);
+
+    const resultad = document.getElementById("resultado");
 
     try {
-        validarDatos(nombre, edad);
-        resultado.text
+        const promedio = calcularPromedio(nota1, nota2, nota3);
+
+        resultado.textContent = `El promedio es: ${promedio.toFixed(2)}`;
+        resultado.style.color = promedio>=6 ? "green": "orange";
     } catch (error) {
-        console.log("Error:", error);
+        console.log(error.message);
+
         resultado.textContent = error.message;
         resultado.style.color = "red";
     }
 
-    console.log(nombre, edad);
 });
 
-function validarDatos(nombre, edad){
-    console.log("Validando datos...");
+function calcularPromedio(n1, n2, n3){
+    console.log("Calculando promedio...");
 
-    if(!nombre || edad <= 0){
-        throw new Error("Por favor completa todos los campos");
+    if([n1, n2, n3].some(isNaN)){
+        throw new Error("Todas las notas deber ser números válidos");
     }
 
-    if(edad <= 0){
-        throw new Error("La edad debe ser un número válido");
+    if([n1, n2, n3].some(n => n < 0 || n > 10)){
+        throw new Error("Las notas deben ser entre 0 y 10");
     }
-
-    if(nombre.length > 30){
-        throw new Error("El nombre es demasiado largo");
-    }
-
+    return (n1 + n2 + n3) / 3
 }
