@@ -5,9 +5,19 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
     const pass = document.getElementById("password").value.trim();
     const message = document.getElementById("message");
 
-    if(user === "" || pass === ""){
+    if(user === "" && pass === ""){
         message.textContent = "Todos los campos son obligatorios";
-        message.style.color = "green"
+        message.style.color = "red"
+        return;
+    }
+    if(user === ""){
+        message.textContent = "Falta usuario";
+        message.style.color = "red"
+        return;
+    }
+    if(pass === ""){
+        message.textContent = "Falta contraseña";
+        message.style.color = "red"
         return;
     }
 
