@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Integración</title>
+</head>
+<body>
+    <h1>Prueba de Integración</h1>
+    <script>
+        function validarUsuario(usuario){
+            return usuario.nombre && esCorreoValido(usuario.correo);
+        }
+
+        function esCorreoValido(email){
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            return regex.test(email);
+        }
+
+        function registrarUsuario(usuario){
+            if(validarUsuario(usuario)){
+                return `Usuario ${usuario.nombre} Registrado`
+            }else{
+                return "Datos inválidos"
+            }
+        }
+
+        const usuarioValido = {nombre: "Ana", correo: "ana@mail.com"}
+        const usuarioInalido = {nombre: "Ulises", correo: "ulises@mail"}
+
+        console.log(registrarUsuario(usuarioValido));
+        console.log(registrarUsuario(usuarioInalido));
+
+    </script>
+    
+</body>
+</html>

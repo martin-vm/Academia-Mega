@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 13</title>
+</head>
+<body>
+    <h1>Tipos de pruebas en el desarrollo de software</h1>
+    <form id="form">
+        <input type="text" id="nombre" placeholder="Nombre">
+        <button type="submit">Enviar</button>
+    </form>
+    <p id="resultado"></p>
+    <script>
+
+        //Prueba Unitaria
+
+        function suma(a, b){
+            return a+b;
+        }
+
+        console.log(suma(2,3));
+        console.assert(suma(2,3) === 5, "Error en la suma");
+
+        //fetch("api...").then(res => res.json()).then(data => mostrarUsuario(data));
+
+        document.getElementById("form").addEventListener("submit", (e)=>{
+            e.preventDefault();
+            const nombre = document.getElementById("nombre").value;
+            document.getElementById("resultado").textContent = `Hola ${nombre}`
+        });
+    </script>
+</body>
+</html>
