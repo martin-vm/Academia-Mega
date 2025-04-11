@@ -19,5 +19,26 @@
         <button type="submit">Enviar</button>
         <p id="mensaje"></p>
     </form>
+
+    <script>
+        function esCorreoValido(email){
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            return regex.test(email);
+        }
+
+        document.getElementById("form").addEventListener("submit", (e)=>{
+            const nombre = document.getElementById("nombre").value;
+            const correo = document.getElementById("correo").value;
+            const mensaje = document.getElementById("mensaje");
+
+            if(!nombre || !esCorreoValido(correo)){
+                mensaje.textContent = "Datos inválidos";
+                mensaje.className = "error"
+            }else{
+                mensaje.textContent = `Gracias por registrarte, ${nombre}!!`
+                mensaje.className = ""
+            }
+        })
+    </script>
 </body>
 </html>
