@@ -1,0 +1,16 @@
+<h1>Usuarios listados desde el componente padre</h1>
+
+<br>
+<div style="display: flex; flex-wrap: wrap; gap:1rem;">
+    <p>{{mensajeDelHijo}}</p>
+    <hr>
+    <app-hijo 
+        *ngFor="let usuario of usuarios"
+        [info]="usuario"
+        (mensaje)="recibirMensaje($event)"
+    ></app-hijo>        
+</div>
+
+
+
+

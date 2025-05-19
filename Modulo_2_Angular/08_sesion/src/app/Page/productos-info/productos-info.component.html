@@ -1,0 +1,10 @@
+<h1>Lista de Productos</h1>
+<div style="display: flex; gap: 2rem;">
+    <div style="width: 50%;">
+       <app-productos
+       *ngFor = "let item of items"
+       [info] = "item"
+       ></app-productos>
+       <br>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<h1>Usuarios listados desde el componente padre</h1>
+<div style="display: flex; flex-wrap: wrap; gap:1rem;">
+    
+    <app-hijo 
+        *ngFor="let usuario of usuarios"
+        [info]="usuario"
+    ></app-hijo>
+    
+    
+
+</div>
+
+
+
+
