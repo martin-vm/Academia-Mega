@@ -1,0 +1,51 @@
+using Microsoft.AspNetCore.Mvc;
+using TaskManager.Models;
+using TaskManager.Repositories;
+using TaskManager.Services;
+
+namespace TaskManager.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class TaskController : ControllerBase
+    {
+        private readonly ITaskRepository _repo;
+        private readonly IEnumerable<INotificationService> _notifiers;
+
+        public TaskController(ITaskRepository repo, IEnumerable<INotificationService> notifiers)
+        {
+            _repo = repo;
+            _notifiers = notifiers;
+        }
+
+        [HttpGet] //GET /api/task
+        public async Task<IEnumerable<TaskItem?>> GetAll() =>
+            await _repo.GetAllAsync();
+
+        [HttpPost]
+        public async Task<ActionResult<TaskItem>> Create(TaskItem taskItem)
+        {
+            await _repo.AddAsync(taskItem);
+
+            foreach (var notifier in _notifiers)
+                await notifier.NotifyTaskCreatedAsync(taskItem);
+
+            return CreatedAtAction(nameof(GetAll), new { id = taskItem.id }, taskItem);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, TaskItem taskItem)
+        {
+            var resultado = await _repo.UpdateAsync(taskItem);
+            return !resultado ? NotFound() : Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var resultado = await _repo.DeleteAsync(id);
+            return !resultado ? NotFound() : Ok();
+        }
+
+    }
+}
