@@ -1,0 +1,36 @@
+using TaskManager.Models;
+using System.Collections.Concurrent;
+
+namespace TaskManager.Repositories
+{
+    public class InMemoryTaskRepository : ITaskRepository
+    {
+        private readonly ConcurrentDictionary<Guid, TaskItem> _db = new();
+
+        public Task<IEnumerable<TaskItem>> GetAllAsync() =>
+            Task.FromResult(_db.Values.AsEnumerable());
+
+        public Task<TaskItem?> GetAsync(Guid id) =>
+            Task.FromResult(_db.GetValueOrDefault(id));
+
+        public Task AddAsync(TaskItem task)
+        {
+            _db[task.id] = task;
+            return Task.CompletedTask;
+        }
+        public Task<bool> UpdateAsync(TaskItem task)
+        {
+            if (!_db.ContainsKey(task.id))
+                return Task.FromResult(false);
+
+            _db[task.id] = task;
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> DeleteAsync(Guid id)
+        {
+            _db.Remove(id, out _);
+            return Task.FromResult(true);
+        }
+    }
+}
