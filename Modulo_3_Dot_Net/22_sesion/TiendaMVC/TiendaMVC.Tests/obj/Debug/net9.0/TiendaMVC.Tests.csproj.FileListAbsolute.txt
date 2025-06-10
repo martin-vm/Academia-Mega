@@ -1,0 +1,5 @@
+D:\Proyectos\dotnet\TiendaMVC\TiendaMVC.Tests\obj\Debug\net9.0\TiendaMVC.Tests.csproj.AssemblyReference.cache
+D:\Proyectos\dotnet\TiendaMVC\TiendaMVC.Tests\obj\Debug\net9.0\TiendaMVC.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyectos\dotnet\TiendaMVC\TiendaMVC.Tests\obj\Debug\net9.0\TiendaMVC.Tests.AssemblyInfoInputs.cache
+D:\Proyectos\dotnet\TiendaMVC\TiendaMVC.Tests\obj\Debug\net9.0\TiendaMVC.Tests.AssemblyInfo.cs
+D:\Proyectos\dotnet\TiendaMVC\TiendaMVC.Tests\obj\Debug\net9.0\TiendaMVC.Tests.csproj.CoreCompileInputs.cache
