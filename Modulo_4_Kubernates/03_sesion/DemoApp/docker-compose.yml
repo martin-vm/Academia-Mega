@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  build: .
+  ports:
+    - "8000:80"
+  depends_on: 
+    - db
+  enviroment:
+    - ASPNETCORE_ENVIROMENT=Development
+    - ConnectionStrings_DefaultConnection=Server=MEGANG-384.evolution.corp;Database=Starbucks;User Id=usr_starbucks;Password=Pr1m4v3r4.
+  db: 
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    enviroment: 
+      - ACCEPT_EULA=Y
+      - PASS=Pr1m4v3r4.
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssqldata: /var/opt/mssql
+  volumes:
+    mssqldata
